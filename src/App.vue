@@ -1,7 +1,7 @@
 <!--
  * @Author: Robin LEI
  * @Date: 2021-05-28 15:22:19
- * @LastEditTime: 2021-06-09 18:00:35
+ * @LastEditTime: 2021-06-11 17:04:44
  * @FilePath: \Assembly\src\App.vue
 -->
 <template>
@@ -75,7 +75,7 @@ export default defineComponent({
 }
 @media all and (max-width: 1500px) {
     html {
-        font-size: 65px;
+        font-size: 73px;
     }
     h1 {
         font-size: 0.32rem;
@@ -89,7 +89,7 @@ export default defineComponent({
 }
 @media screen and (min-width: 1500px) and (max-width: 1750px) {
     html {
-        font-size: 90px;
+        font-size: 85px;
     }
     h1 {
         font-size: 0.32rem;

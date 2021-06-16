@@ -50,6 +50,21 @@ export const asyncRoutes: any = [
             },
         ]
     },
+    {
+        path: '/Assembly',
+        component: Layout,//指定文件
+        redirect: '/Assembly/index',//重定向到home
+        name: '组件管理',
+        hideSubset: false,
+        children: [//子目录
+            {
+                path: 'index',
+                component: () => import('@/views/Assembly/index.vue'),
+                name: '配置组件',
+                meta: { title: '配置组件', icon: 'international', affix: true }
+            },
+        ]
+    },
     // {
     //     path: '/Config',
     //     component: Layout,//指定文件
