@@ -1,7 +1,7 @@
 <!--
  * @Author: Robin LEI
  * @Date: 2021-06-10 10:06:18
- * @LastEditTime: 2021-06-11 17:10:27
+ * @LastEditTime: 2021-06-28 09:52:22
  * @FilePath: \Assembly\src\views\Assembly\components\List\index.vue
 -->
 <template>
@@ -10,6 +10,7 @@
         v-model:selectedKeys="selectedKeys"
         :tree-data="AssemblyListArr"
         :replaceFields='replaceFields'
+        @select='select'
     >
     </a-directory-tree>
 </template>
@@ -36,10 +37,8 @@ export default defineComponent({
         this.initAssemblyListFunc();
     },
     watch: {
-        // selectedKeys (e){
-        //     console.log(e, this.expandedKeys)
-        // }
     },
+    emits:['clickAssembly'],
     methods: {
         async initAssemblyListFunc(treeNode) {
             let { data } = await assemblyList({
@@ -58,6 +57,11 @@ export default defineComponent({
                 }
             })
             return Arr
+        },
+        select ([id], e) {
+            if (e.node.isLeaf) {
+                this.$emit('clickAssembly', id)
+            }
         }
     },
 });

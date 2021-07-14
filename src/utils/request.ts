@@ -1,7 +1,7 @@
 /*
  * @Author: Robin LEI
  * @Date: 2021-06-07 16:16:15
- * @LastEditTime: 2021-06-08 13:56:43
+ * @LastEditTime: 2021-06-28 14:30:48
  * @FilePath: \Assembly\src\utils\request.ts
  */
 import axios from 'axios'
@@ -25,7 +25,6 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     (response: any)=>{
         const res = response.data
-        console.log(res)
         if(res.code !== 1) {
             if (res.code === -100) {
                 message.error('登录已失效，请重新登录')

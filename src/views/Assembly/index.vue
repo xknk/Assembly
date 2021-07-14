@@ -1,47 +1,53 @@
 <!--
  * @Author: Robin LEI
  * @Date: 2021-06-10 10:25:07
- * @LastEditTime: 2021-06-11 17:06:18
+ * @LastEditTime: 2021-06-28 16:05:42
  * @FilePath: \Assembly\src\views\Assembly\index.vue
 -->
 <template>
     <div class="Assembly-box">
         <a-card class="list-box">
-            <assembly-list />
+            <assembly-list @clickAssembly='clickAssemblyFunc' />
         </a-card>
         <a-card class="template-box">
-            <assembly-template />
+            <assembly-template :assemblyDataObj="assemblyDataObj"  />
         </a-card>
-        <a-card class="option-box">
-           222
+        <a-card class="config-box">
+            <assembly-config v-model:assemblyDataObj="assemblyDataObj" />
         </a-card>
-        <!-- <a-row :gutter="16" style="height: 100%">
-            <a-col :span="4" style="height: 100%">
-                <a-card class="list-box">
-                    <assembly-list />
-                </a-card>
-            </a-col>
-            <a-col :span="16" class="template-box">
-                <assembly-template />
-            </a-col>
-            <a-col :span="4" class="option-box"> </a-col>
-        </a-row> -->
     </div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 import assemblyList from "./components/List/index.vue";
 import assemblyTemplate from "./components/Template/index.vue";
+import assemblyConfig from "./components/Config/index.vue";
+import { echarsDataList } from '../../api/assembly'
 export default defineComponent({
     name: "Assembly",
     setup() {},
     components: {
         assemblyList,
         assemblyTemplate,
+        assemblyConfig
     },
     data() {
-        return {};
+        return {
+            assemblyDataObj: {}
+        };
     },
+    methods: {
+        async clickAssemblyFunc(id: String | Number) {
+            let { data } = await echarsDataList({
+                token: this.$store.getters.token,
+                id: id
+            });
+            this.assemblyDataObj = {
+                ...data,
+                option:data && data.option ? JSON.parse(data.option) : {},
+            }
+        },
+    }
 });
 </script>
 <style scoped>
@@ -49,24 +55,43 @@ export default defineComponent({
     display: flex;
 }
 .list-box {
-    flex:1;
+    flex: 1;
     height: 6.5rem;
     overflow-y: scroll;
     /* overflow-x: hidden; */
 }
-.template-box{
-    flex:4;
+.template-box {
+    flex: 4;
+    height: 6.5rem;
 }
-.option-box{
+.config-box {
     flex: 1;
+    height: 6.5rem;
+    overflow-y: scroll;
+    box-sizing: border-box;
 }
 ::-webkit-scrollbar {
     /*滚动条整体样式*/
-    width: .02rem; /*高宽分别对应横竖滚动条的尺寸*/
-    height: .02rem !important;
+    width: 0.02rem; /*高宽分别对应横竖滚动条的尺寸*/
+    height: 0.02rem !important;
 }
 ::-webkit-scrollbar-thumb {
     /*滚动条里面小方块*/
     background-color: #1890ff;
 }
+</style>
+<style lang='scss'>
+    .Assembly-box{
+        .template-box{
+            .ant-card-body{
+                height: 100%;
+            }
+        }
+        .config-box{
+            .ant-card-body{
+               padding:  0px 0px 0px 0px;
+               height: 100%;
+            }
+        }
+    }
 </style>
