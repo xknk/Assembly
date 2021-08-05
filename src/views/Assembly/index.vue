@@ -1,8 +1,8 @@
 <!--
  * @Author: Robin LEI
  * @Date: 2021-06-10 10:25:07
- * @LastEditTime: 2021-06-28 16:05:42
- * @FilePath: \Assembly\src\views\Assembly\index.vue
+ * @LastEditTime: 2021-08-05 16:09:01
+ * @FilePath: \vue-arc-demod:\vue\Assembly\src\views\Assembly\index.vue
 -->
 <template>
     <div class="Assembly-box">
@@ -22,7 +22,7 @@ import { defineComponent } from "vue";
 import assemblyList from "./components/List/index.vue";
 import assemblyTemplate from "./components/Template/index.vue";
 import assemblyConfig from "./components/Config/index.vue";
-import { echarsDataList } from '../../api/assembly'
+import { echarsData } from '../../api/assembly'
 export default defineComponent({
     name: "Assembly",
     setup() {},
@@ -38,7 +38,7 @@ export default defineComponent({
     },
     methods: {
         async clickAssemblyFunc(id: String | Number) {
-            let { data } = await echarsDataList({
+            let { data } = await echarsData({
                 token: this.$store.getters.token,
                 id: id
             });

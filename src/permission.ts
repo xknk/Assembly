@@ -1,8 +1,8 @@
 /*
  * @Author: Robin LEI
  * @Date: 2021-05-28 17:00:43
- * @LastEditTime: 2021-06-08 15:12:16
- * @FilePath: \Assembly\src\permission.ts
+ * @LastEditTime: 2021-08-05 16:09:42
+ * @FilePath: \vue-arc-demod:\vue\Assembly\src\permission.ts
  */
 import router from './router'
 import store from './store'
@@ -23,6 +23,7 @@ router.beforeEach(async (to: any, from, next) => {
                 const { role_path, username } = await store.dispatch('user/getInfo')
                 const accessRoutes: any = await store.dispatch('permission/generateRoutes', role_path, username)
                 router.addRoute(accessRoutes)
+                console.log(accessRoutes, 222)
                 clickNavFunc(to)
                 next({ ...to, replace: true })
                 NProgress.done()
